@@ -1,79 +1,1618 @@
-from pathlib import Path
-p=Path("/mnt/data/QH-VisionX-Response-Single-File")
-p.mkdir(exist_ok=True)
-html='''<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QH VisionX Response</title>
-<style>
-:root{--bg:#07111f;--card:#0d1d30;--line:#24405b;--text:#eef6ff;--muted:#9bb0c4;--gold:#ffd54a;--cyan:#43d9ff;--ok:#48d597}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#12395b,#07111f 45%,#040a11);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}
-.hidden{display:none!important}.login{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(430px,100%);padding:30px;border:1px solid var(--line);border-radius:25px;background:#0b192ae8;box-shadow:0 20px 60px #0008}.logo{width:78px;height:78px;margin:auto;display:grid;place-items:center;border-radius:20px;background:linear-gradient(145deg,#ffd54a,#a87800);color:#07111f;font-size:27px;font-weight:900}.brand{text-align:center}.brand h1{margin:17px 0 6px}.muted{color:var(--muted)}.field{margin:14px 0}.field label{display:block;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#071321;color:#fff;outline:0}.primary{width:100%;padding:13px;border:0;border-radius:12px;background:linear-gradient(90deg,#ffd54a,#f3ae25);font-weight:800}.error{margin-top:12px;padding:10px;border-radius:10px;background:#ff555522;color:#ffabab}
-.topbar{height:70px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#07111fee;border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}.brand2{display:flex;align-items:center;gap:10px}.mini{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:#07111f;font-weight:900}.actions{display:flex;gap:8px}.btn{border:1px solid var(--line);background:#10243b;color:#fff;border-radius:10px;padding:10px 13px}.danger{color:#ffaaa9}.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:#18304a;color:#c9d9e6;font-size:12px}.ok{background:#123b31;color:#79e2bb}
-.layout{display:grid;grid-template-columns:235px 1fr;min-height:calc(100vh - 70px)}aside{background:#081625;border-left:1px solid var(--line);padding:15px;position:sticky;top:70px;height:calc(100vh - 70px)}nav button{width:100%;text-align:right;border:0;background:transparent;color:#a9bfd1;padding:12px;border-radius:10px;margin:3px 0}nav button.active,nav button:hover{background:#132a42;color:#fff}.content{padding:22px;max-width:1450px;width:100%;margin:auto}.section{display:none}.section.active{display:block}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:15px}.card,.stat{background:linear-gradient(145deg,#0d2035,#091625);border:1px solid var(--line);border-radius:17px;padding:17px}.stat span{color:var(--muted);font-size:13px}.stat b{display:block;font-size:27px;margin-top:8px}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:15px}.list{display:grid;gap:9px}.item{padding:12px;border:1px solid var(--line);border-radius:11px;background:#091827}.map{height:480px;border-radius:16px;border:1px solid var(--line);position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,#0c1b2e,#0c1b2e 12px,#10243b 12px,#10243b 24px)}.map:after{content:"OPEN MAP / OpenStreetMap";position:absolute;inset:0;display:grid;place-items:center;color:#63839c}.gridlines{position:absolute;inset:0;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:50px 50px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.toolbar input{flex:1;min-width:180px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#071321;color:#fff}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:right}.empty{text-align:center;padding:25px;color:var(--muted)}
-@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:fixed;bottom:0;left:0;right:0;top:auto;height:auto;z-index:20;padding:5px;border:0;border-top:1px solid var(--line)}nav{display:flex;overflow:auto}nav button{min-width:85px;text-align:center;font-size:11px}.content{padding:14px;padding-bottom:80px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.map{height:400px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <title>QH VisionX Response</title>
+
+  <meta name="description"
+        content="QH VisionX Response - Emergency Response and Real-Time Coordination Platform">
+
+  <meta name="theme-color" content="#07111f">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <link
+    href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #07111f;
+      color: #e8eef7;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #loginScreen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at top right, #15345b 0, transparent 35%),
+        radial-gradient(circle at bottom left, #123b3d 0, transparent 35%),
+        #07111f;
+    }
+
+    .login-card {
+      width: min(440px, 100%);
+      padding: 32px;
+      border: 1px solid #263a52;
+      border-radius: 22px;
+      background: rgba(11, 25, 43, .96);
+      box-shadow: 0 20px 70px rgba(0,0,0,.45);
+    }
+
+    .logo {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #18c8b8, #087b8a);
+      color: white;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    .login-card h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9eafc3;
+      text-align: center;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 7px;
+      color: #b8c8da;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      color: #eef5ff;
+      background: #0b1b2e;
+      border: 1px solid #29405b;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #19c9b9;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(135deg, #10b9aa, #087b8a);
+      font-weight: 800;
+    }
+
+    .message {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      background: #15283e;
+      color: #c5d3e2;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 270px 1fr;
+    }
+
+    aside {
+      border-left: 1px solid #23374e;
+      background: #081522;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .brand .logo {
+      width: 48px;
+      height: 48px;
+      margin: 0;
+      border-radius: 14px;
+      font-size: 17px;
+    }
+
+    .brand strong {
+      display: block;
+    }
+
+    .brand small {
+      color: #7f92a9;
+    }
+
+    nav button {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 11px 13px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      text-align: right;
+      background: transparent;
+      color: #aebfd2;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: #10273d;
+      border-color: #1e435e;
+      color: #fff;
+    }
+
+    .user-box {
+      margin-top: 25px;
+      padding: 14px;
+      border: 1px solid #20354b;
+      border-radius: 14px;
+      color: #9eb0c3;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 12px;
+      padding: 9px;
+      border: 1px solid #51343a;
+      border-radius: 9px;
+      background: #25151a;
+      color: #ffb8c0;
+    }
+
+    main {
+      min-width: 0;
+      height: 100%;
+      overflow-y: auto;
+      background: #091522;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 20px;
+      border-bottom: 1px solid #1e334a;
+      background: rgba(7,17,31,.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #aebfd2;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #14c8a5;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid #21364c;
+      border-radius: 16px;
+      background: #0c1c2d;
+    }
+
+    .stat small {
+      color: #8296ac;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 27px;
+    }
+
+    .panel {
+      padding: 18px;
+      margin-bottom: 18px;
+      border: 1px solid #20364d;
+      border-radius: 17px;
+      background: #0b1b2b;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .map-tools {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .map-tools input {
+      flex: 1;
+    }
+
+    .small-btn {
+      padding: 9px 13px;
+      border: 1px solid #2a4761;
+      border-radius: 9px;
+      background: #10273d;
+      color: #d8e5f3;
+    }
+
+    #map {
+      height: 62vh;
+      min-height: 420px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .incident {
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #253d55;
+      border-radius: 12px;
+      background: #0d2032;
+    }
+
+    .incident strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .incident small {
+      color: #8ea1b6;
+      line-height: 1.7;
+    }
+
+    .severity-critical {
+      border-right: 4px solid #ef5350;
+    }
+
+    .severity-high {
+      border-right: 4px solid #ff9800;
+    }
+
+    .severity-medium {
+      border-right: 4px solid #ffc107;
+    }
+
+    .severity-low {
+      border-right: 4px solid #26a69a;
+    }
+
+    .empty {
+      color: #8093a8;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .footer-note {
+      color: #71849a;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 900px) {
+      #app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 100;
+        height: auto;
+        padding: 10px;
+        border-left: 0;
+        border-bottom: 1px solid #23374e;
+      }
+
+      .brand {
+        margin-bottom: 8px;
+      }
+
+      nav {
+        display: flex;
+        overflow-x: auto;
+        gap: 6px;
+      }
+
+      nav button {
+        min-width: 105px;
+        margin: 0;
+        text-align: center;
+      }
+
+      .user-box {
+        display: none;
+      }
+
+      main {
+        margin-top: 120px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .content {
+        padding: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 12px;
+      }
+
+      #map {
+        min-height: 360px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="login" class="login"><div class="login-card">
-<div class="brand"><div class="logo">QH</div><h1>QH VisionX Response</h1><p class="muted">سامانه هماهنگی و مدیریت پاسخ‌گویی اضطراری</p></div>
-<form id="loginForm"><div class="field"><label>نام کاربری</label><input id="user" value="admin" required></div>
-<div class="field"><label>رمز عبور</label><input id="pass" type="password" required></div>
-<button class="primary">ورود به Dashboard</button><div id="err" class="error hidden">نام کاربری یا رمز عبور نادرست است.</div></form>
-<p class="muted" style="font-size:12px;text-align:center">نسخه Demo برای GitHub Pages؛ امنیت واقعی نیازمند Backend است.</p>
-</div></div>
 
-<div id="app" class="hidden"><header class="topbar"><div class="brand2"><div class="mini">QH</div><div><b>QH VisionX Response</b><small class="muted"> Dashboard</small></div></div><div class="actions"><span id="online" class="badge">...</span><button id="logout" class="btn danger">خروج</button></div></header>
-<div class="layout"><aside><nav>
-<button class="active" data-s="dashboard">📊 داشبورد</button><button data-s="map">🗺️ نقشه</button><button data-s="incidents">🚨 رویدادها</button><button data-s="teams">👥 تیم‌ها</button><button data-s="reports">📑 گزارش‌ها</button><button data-s="settings">⚙️ تنظیمات</button>
-</nav></aside><main class="content">
+<section id="loginScreen">
+  <form id="loginForm" class="login-card">
+    <div class="logo">QH</div>
 
-<section id="dashboard" class="section active"><div class="head"><div><h2>داشبورد عملیاتی</h2><p class="muted">نمای کلی داده‌های این دستگاه</p></div></div>
-<div class="stats"><div class="stat"><span>کل رویدادها</span><b id="nI">0</b></div><div class="stat"><span>فعال</span><b id="nA">0</b></div><div class="stat"><span>تیم‌ها</span><b id="nT">0</b></div><div class="stat"><span>موقعیت‌ها</span><b id="nL">0</b></div></div>
-<div class="grid"><div class="card"><h3>آخرین رویدادها</h3><div id="recent" class="list"></div></div><div class="card"><h3>وضعیت</h3><div class="list"><div class="item">ذخیره‌سازی: <span class="badge ok">LocalStorage</span></div><div class="item">GPS: <span id="gpsState" class="badge">آماده</span></div></div></div></div></section>
+    <h1>QH VisionX Response</h1>
 
-<section id="map" class="section"><div class="head"><div><h2>نقشه عملیاتی</h2><p class="muted">GPS و نقاط ثبت‌شده</p></div></div>
-<div class="toolbar"><input id="search" placeholder="جستجوی مکان، مثال: Kabul"><button id="searchBtn" class="btn">جستجو</button><button id="gps" class="btn">📍 GPS</button><button id="marker" class="btn">➕ نقطه</button></div>
-<div class="map"><div class="gridlines"></div></div><div class="card" style="margin-top:10px"><b>مختصات:</b> <span id="coords" class="muted">ثبت نشده</span><div id="result" class="muted" style="margin-top:8px"></div></div></section>
+    <div class="subtitle">
+      سامانه هوشمند هماهنگی و مدیریت پاسخ اضطراری
+    </div>
 
-<section id="incidents" class="section"><div class="head"><h2>مدیریت رویدادها</h2><button id="newI" class="btn">➕ رویداد جدید</button></div>
-<div id="iform" class="card hidden"><div class="field"><label>عنوان</label><input id="title"></div><div class="field"><label>نوع</label><select id="type"><option>پزشکی</option><option>آتش‌سوزی</option><option>زلزله</option><option>سیلاب</option><option>ایمنی عمومی</option><option>سایر</option></select></div><div class="field"><label>اولویت</label><select id="priority"><option>عادی</option><option>مهم</option><option>فوری</option></select></div><div class="field"><label>توضیحات</label><textarea id="desc" rows="3"></textarea></div><button id="saveI" class="btn">ذخیره</button></div>
-<div id="ilist" class="list" style="margin-top:10px"></div></section>
+    <label for="username">نام کاربری</label>
+    <input id="username" autocomplete="username" required>
 
-<section id="teams" class="section"><div class="head"><h2>تیم‌ها</h2><button id="newT" class="btn">➕ تیم جدید</button></div><div id="tform" class="card hidden"><div class="field"><label>نام تیم</label><input id="team"></div><div class="field"><label>مسئول</label><input id="lead"></div><button id="saveT" class="btn">ذخیره</button></div><div id="tlist" class="list" style="margin-top:10px"></div></section>
+    <label for="password">رمز عبور</label>
+    <input id="password" type="password" autocomplete="current-password" required>
 
-<section id="reports" class="section"><div class="head"><h2>گزارش‌ها</h2><div><button id="export" class="btn">⬇️ JSON</button> <button onclick="print()" class="btn">🖨️ چاپ</button></div></div><div class="card"><table class="table"><thead><tr><th>عنوان</th><th>نوع</th><th>اولویت</th><th>زمان</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+    <button class="primary" type="submit">
+      ورود امن
+    </button>
 
-<section id="settings" class="section"><div class="head"><h2>تنظیمات</h2></div><div class="card"><p>نام کاربری: <b>admin</b></p><p>نسخه: Single-File 1.0</p><button id="clear" class="btn danger">پاک‌سازی داده‌های محلی</button></div></section>
-</main></div></div>
+    <div id="loginMessage" class="message hidden"></div>
+  </form>
+</section>
+
+
+<section id="app" class="hidden">
+
+  <aside>
+
+    <div class="brand">
+      <div class="logo">QH</div>
+      <div>
+        <strong>QH VisionX</strong>
+        <small>Response Center</small>
+      </div>
+    </div>
+
+    <nav>
+      <button class="active" data-page="dashboard">داشبورد</button>
+      <button data-page="mapPage">نقشه زنده</button>
+      <button data-page="incidentsPage">حوادث</button>
+      <button data-page="teamsPage">تیم‌ها</button>
+      <button data-page="gpsPage">GPS</button>
+      <button data-page="adminPage">مدیریت</button>
+    </nav>
+
+    <div class="user-box">
+      <div>کاربر:</div>
+      <strong id="currentUser">—</strong>
+
+      <div>نقش:</div>
+      <strong id="currentRole">—</strong>
+
+      <button id="logoutBtn" class="logout">
+        خروج
+      </button>
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <div class="topbar">
+      <strong>QH VisionX Response Center</strong>
+
+      <div class="status">
+        <span id="statusDot" class="dot"></span>
+        <span id="connectionStatus">در حال اتصال</span>
+      </div>
+    </div>
+
+
+    <div class="content">
+
+      <!-- Dashboard -->
+
+      <section id="dashboard" class="page active">
+
+        <h2>داشبورد عملیاتی</h2>
+
+        <div class="stats">
+          <div class="stat">
+            <small>حوادث</small>
+            <strong id="incidentCount">0</strong>
+          </div>
+
+          <div class="stat">
+            <small>تیم‌ها</small>
+            <strong id="teamCount">0</strong>
+          </div>
+
+          <div class="stat">
+            <small>موقعیت‌های GPS</small>
+            <strong id="locationCount">0</strong>
+          </div>
+
+          <div class="stat">
+            <small>وضعیت سیستم</small>
+            <strong id="systemStatus">—</strong>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>آخرین حوادث</h3>
+            <button class="small-btn" onclick="loadIncidents()">
+              بروزرسانی
+            </button>
+          </div>
+
+          <div id="dashboardIncidents"></div>
+        </div>
+
+      </section>
+
+
+      <!-- Map -->
+
+      <section id="mapPage" class="page">
+
+        <h2>نقشه زنده افغانستان</h2>
+
+        <div class="panel">
+
+          <div class="map-tools">
+            <input
+              id="searchPlace"
+              placeholder="جستجوی شهر یا مکان در افغانستان..."
+            >
+
+            <button id="searchBtn" class="small-btn">
+              جستجو
+            </button>
+
+            <button id="myLocationBtn" class="small-btn">
+              موقعیت من
+            </button>
+          </div>
+
+          <div id="map"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Incidents -->
+
+      <section id="incidentsPage" class="page">
+
+        <h2>مدیریت حوادث</h2>
+
+        <div class="grid">
+
+          <div class="panel">
+
+            <h3>ثبت حادثه جدید</h3>
+
+            <form id="incidentForm">
+
+              <label>عنوان حادثه</label>
+              <input id="incidentTitle" required>
+
+              <label>شرح</label>
+              <textarea id="incidentDescription"></textarea>
+
+              <label>شدت</label>
+              <select id="incidentSeverity">
+                <option value="low">کم</option>
+                <option value="medium" selected>متوسط</option>
+                <option value="high">زیاد</option>
+                <option value="critical">بحرانی</option>
+              </select>
+
+              <button class="primary" type="submit">
+                ثبت حادثه
+              </button>
+
+            </form>
+
+          </div>
+
+
+          <div class="panel">
+
+            <h3>فهرست حوادث</h3>
+
+            <div id="incidentList"></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Teams -->
+
+      <section id="teamsPage" class="page">
+
+        <h2>تیم‌های پاسخ</h2>
+
+        <div class="panel">
+          <div id="teamList"></div>
+        </div>
+
+      </section>
+
+
+      <!-- GPS -->
+
+      <section id="gpsPage" class="page">
+
+        <h2>موقعیت GPS</h2>
+
+        <div class="panel">
+
+          <p>
+            این بخش موقعیت دستگاه را فقط پس از اجازه صریح کاربر دریافت می‌کند.
+          </p>
+
+          <button id="startGpsBtn" class="small-btn">
+            شروع GPS
+          </button>
+
+          <button id="stopGpsBtn" class="small-btn">
+            توقف GPS
+          </button>
+
+          <div id="gpsInfo" class="message">
+            GPS فعال نیست.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Admin -->
+
+      <section id="adminPage" class="page">
+
+        <h2>مدیریت سیستم</h2>
+
+        <div class="panel">
+
+          <div id="adminStats">
+            اطلاعات مدیریت در حال دریافت...
+          </div>
+
+          <p class="footer-note">
+            دسترسی این بخش بر اساس نقش کاربر کنترل می‌شود.
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</section>
+
 
 <script>
-const USER="admin",PASS="QHVisionX@2026",KEY="qhvr-data";
-let d=JSON.parse(localStorage.getItem(KEY)||"null")||{incidents:[],teams:[{name:"QH VisionX Response",lead:"مدیریت سامانه"}],locations:[]};
-const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-function save(){localStorage.setItem(KEY,JSON.stringify(d));render()}
-function render(){
-$("nI").textContent=d.incidents.length;$("nA").textContent=d.incidents.filter(x=>x.status!=="بسته").length;$("nT").textContent=d.teams.length;$("nL").textContent=d.locations.length;
-$("recent").innerHTML=d.incidents.slice(-5).reverse().map(i=>`<div class=item><b>${esc(i.title)}</b><br><span class=badge>${esc(i.type)}</span> <span class=badge>${esc(i.priority)}</span><br><small class=muted>${new Date(i.at).toLocaleString("fa-AF")}</small></div>`).join("")||'<div class=empty>رویدادی ثبت نشده است.</div>';
-$("ilist").innerHTML=d.incidents.slice().reverse().map(i=>`<div class=item><b>${esc(i.title)}</b> <span class=badge>${esc(i.type)}</span> <span class=badge>${esc(i.priority)}</span><p class=muted>${esc(i.desc)}</p><small class=muted>${new Date(i.at).toLocaleString("fa-AF")}</small></div>`).join("")||'<div class=empty>رویدادی وجود ندارد.</div>';
-$("tlist").innerHTML=d.teams.map(t=>`<div class=item><b>${esc(t.name)}</b><br><span class=muted>مسئول: ${esc(t.lead||"-")}</span></div>`).join("");
-$("tbody").innerHTML=d.incidents.map(i=>`<tr><td>${esc(i.title)}</td><td>${esc(i.type)}</td><td>${esc(i.priority)}</td><td>${new Date(i.at).toLocaleString("fa-AF")}</td></tr>`).join("")||'<tr><td colspan=4 class=empty>داده‌ای نیست</td></tr>';
+const API_BASE = "/api";
+
+let token = localStorage.getItem("qh_token");
+let currentUser = null;
+let map = null;
+let userMarker = null;
+let gpsWatchId = null;
+let websocket = null;
+
+const $ = (id) => document.getElementById(id);
+
+
+function showLoginMessage(message) {
+  $("loginMessage").textContent = message;
+  $("loginMessage").classList.remove("hidden");
 }
-$("loginForm").onsubmit=e=>{e.preventDefault();if($("user").value.trim()===USER&&$("pass").value===PASS){sessionStorage.qh="1";$("login").classList.add("hidden");$("app").classList.remove("hidden");render()}else $("err").classList.remove("hidden")};
-$("logout").onclick=()=>{sessionStorage.removeItem("qh");$("app").classList.add("hidden");$("login").classList.remove("hidden")};
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));$(b.dataset.s).classList.add("active")});
-$("newI").onclick=()=>$("iform").classList.toggle("hidden");
-$("saveI").onclick=()=>{let title=$("title").value.trim();if(!title)return alert("عنوان را وارد کنید");d.incidents.push({title,type:$("type").value,priority:$("priority").value,desc:$("desc").value.trim(),status:"فعال",at:new Date().toISOString()});$("iform").classList.add("hidden");$("title").value="";$("desc").value="";save()};
-$("newT").onclick=()=>$("tform").classList.toggle("hidden");
-$("saveT").onclick=()=>{let name=$("team").value.trim();if(!name)return alert("نام تیم را وارد کنید");d.teams.push({name,lead:$("lead").value.trim()});$("team").value="";$("lead").value="";$("tform").classList.add("hidden");save()};
-$("gps").onclick=()=>navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>{let {latitude,longitude}=p.coords;$("coords").textContent=latitude.toFixed(6)+", "+longitude.toFixed(6);$("gpsState").textContent="فعال";$("gpsState").className="badge ok";d.locations.push({lat:latitude,lng:longitude,at:new Date().toISOString()});save()},e=>alert("GPS در دسترس نیست: "+e.message),{enableHighAccuracy:true}):alert("GPS پشتیبانی نمی‌شود");
-$("marker").onclick=()=>{let lat=prompt("Latitude","34.52"),lng=prompt("Longitude","69.18");if(lat&&lng&&!isNaN(lat)&&!isNaN(lng)){d.locations.push({lat:+lat,lng:+lng,at:new Date().toISOString()});$("coords").textContent=lat+", "+lng;save()}};
-$("searchBtn").onclick=async()=>{let q=$("search").value.trim();if(!q)return;$("result").textContent="در حال جستجو...";try{let r=await fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=af&q="+encodeURIComponent(q));let a=await r.json();$("result").textContent=a.length?a.map(x=>x.display_name).join(" | "):"مکانی پیدا نشد."}catch{$("result").textContent="جستجوی آنلاین در دسترس نیست."}};
-$("export").onclick=()=>{let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));a.download="qh-visionx-data.json";a.click()};
-$("clear").onclick=()=>{if(confirm("تمام داده‌های محلی پاک شود؟")){localStorage.removeItem(KEY);location.reload()}};
-function online(){let x=navigator.onLine;$("online").textContent=x?"آنلاین":"آفلاین";$("online").className="badge "+(x?"ok":"");}addEventListener("online",online);addEventListener("offline",online);
-if(sessionStorage.qh){$("login").classList.add("hidden");$("app").classList.remove("hidden");render()}online();
-</script></body></html>'''
-f=p/"index.html"; f.write_text(html,encoding="utf-8")
-print(f)
+
+
+async function api(path, options = {}) {
+
+  const headers = {
+    "Content-Type": "application/json",
+    ...(options.headers || {})
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(API_BASE + path, {
+    ...options,
+    headers
+  });
+
+  if (response.status === 401) {
+    logout();
+    throw new Error("نشست شما منقضی شده است.");
+  }
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || "خطای سرویس");
+  }
+
+  return data;
+}
+
+
+async function login(username, password) {
+
+  const data = await api("/auth/login", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      password
+    })
+  });
+
+  token = data.token;
+
+  localStorage.setItem("qh_token", token);
+
+  currentUser = data.user;
+
+  showApplication();
+
+  await loadAll();
+
+  connectWebSocket();
+}
+
+
+async function checkSession() {
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const data = await api("/auth/me");
+
+    currentUser = data.user;
+
+    showApplication();
+
+    await loadAll();
+
+    connectWebSocket();
+
+    return true;
+
+  } catch {
+    return false;
+  }
+}
+
+
+function showApplication() {
+
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+
+  $("currentUser").textContent =
+    currentUser?.full_name ||
+    currentUser?.fullName ||
+    currentUser?.username ||
+    "کاربر";
+
+  $("currentRole").textContent =
+    currentUser?.role || "—";
+}
+
+
+function logout() {
+
+  token = null;
+  currentUser = null;
+
+  localStorage.removeItem("qh_token");
+
+  if (websocket) {
+    websocket.close();
+  }
+
+  $("app").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+}
+
+
+$("loginForm").addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  try {
+
+    $("loginMessage").classList.add("hidden");
+
+    await login(
+      $("username").value.trim(),
+      $("password").value
+    );
+
+  } catch (error) {
+
+    showLoginMessage(error.message);
+
+  }
+
+});
+
+
+$("logoutBtn").addEventListener("click", logout);
+
+
+document.querySelectorAll("nav button").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll("nav button")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".page")
+      .forEach(page => page.classList.remove("active"));
+
+    $(button.dataset.page).classList.add("active");
+
+    if (button.dataset.page === "mapPage") {
+      setTimeout(() => {
+        initializeMap();
+        if (map) map.resize();
+      }, 100);
+    }
+
+  });
+
+});
+
+
+async function loadAll() {
+
+  await Promise.allSettled([
+    loadIncidents(),
+    loadTeams(),
+    loadLocations(),
+    loadHealth(),
+    loadAdminStats()
+  ]);
+
+}
+
+
+async function loadHealth() {
+
+  try {
+
+    const data = await api("/health");
+
+    $("systemStatus").textContent =
+      data.status === "ok" ? "فعال" : "محدود";
+
+    $("connectionStatus").textContent =
+      data.status === "ok"
+        ? "سیستم آنلاین"
+        : "وضعیت محدود";
+
+  } catch {
+
+    $("systemStatus").textContent = "خطا";
+    $("connectionStatus").textContent = "قطع";
+
+  }
+
+}
+
+
+async function loadIncidents() {
+
+  try {
+
+    const data = await api("/incidents");
+
+    const incidents = data.incidents || [];
+
+    $("incidentCount").textContent = incidents.length;
+
+    renderIncidents(incidents);
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
+
+
+function renderIncidents(incidents) {
+
+  const targets = [
+    $("incidentList"),
+    $("dashboardIncidents")
+  ];
+
+  const html = incidents.length
+    ? incidents.map(renderIncident).join("")
+    : `<div class="empty">هنوز حادثه‌ای ثبت نشده است.</div>`;
+
+  targets.forEach(target => {
+    if (target) target.innerHTML = html;
+  });
+
+}
+
+
+function renderIncident(item) {
+
+  return `
+    <article class="incident severity-${escapeHtml(item.severity)}">
+
+      <strong>${escapeHtml(item.title)}</strong>
+
+      <small>
+        وضعیت: ${escapeHtml(item.status)}
+        <br>
+        شدت: ${escapeHtml(item.severity)}
+        <br>
+        ${item.latitude !== null
+          ? `مختصات: ${Number(item.latitude).toFixed(5)},
+             ${Number(item.longitude).toFixed(5)}`
+          : "بدون مختصات"}
+        <br>
+        ${new Date(item.created_at).toLocaleString("fa-AF")}
+      </small>
+
+      <br>
+
+      <small>
+        ${escapeHtml(item.description || "")}
+      </small>
+
+    </article>
+  `;
+}
+
+
+$("incidentForm").addEventListener("submit", async event => {
+
+  event.preventDefault();
+
+  const payload = {
+    title: $("incidentTitle").value.trim(),
+    description: $("incidentDescription").value.trim(),
+    severity: $("incidentSeverity").value
+  };
+
+  try {
+
+    const position = await getCurrentPosition();
+
+    if (position) {
+      payload.latitude = position.coords.latitude;
+      payload.longitude = position.coords.longitude;
+    }
+
+  } catch {}
+
+  try {
+
+    await api("/incidents", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    $("incidentForm").reset();
+
+    await loadIncidents();
+
+    alert("حادثه با موفقیت ثبت شد.");
+
+  } catch (error) {
+
+    saveOffline("incident", payload);
+
+    alert(
+      "اتصال به سرور برقرار نبود. اطلاعات در صف آفلاین ذخیره شد."
+    );
+
+  }
+
+});
+
+
+async function loadTeams() {
+
+  try {
+
+    const data = await api("/teams");
+
+    const teams = data.teams || [];
+
+    $("teamCount").textContent = teams.length;
+
+    $("teamList").innerHTML = teams.length
+      ? teams.map(team => `
+        <div class="incident">
+          <strong>${escapeHtml(team.name)}</strong>
+          <small>
+            وضعیت: ${escapeHtml(team.status)}
+            <br>
+            ${escapeHtml(team.description || "")}
+          </small>
+        </div>
+      `).join("")
+      : `<div class="empty">تیمی ثبت نشده است.</div>`;
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
+
+
+async function loadLocations() {
+
+  try {
+
+    const data = await api("/locations/latest");
+
+    const locations = data.locations || [];
+
+    $("locationCount").textContent = locations.length;
+
+    initializeMap();
+
+    locations.forEach(location => {
+
+      if (!map) return;
+
+      new maplibregl.Marker()
+        .setLngLat([
+          Number(location.longitude),
+          Number(location.latitude)
+        ])
+        .setPopup(
+          new maplibregl.Popup().setHTML(
+            `<strong>موقعیت کاربر</strong><br>
+             ${Number(location.latitude).toFixed(5)},
+             ${Number(location.longitude).toFixed(5)}`
+          )
+        )
+        .addTo(map);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
+
+
+async function loadAdminStats() {
+
+  if (!currentUser || currentUser.role !== "admin") {
+
+    $("adminStats").textContent =
+      "این بخش فقط برای مدیر سیستم فعال است.";
+
+    return;
+  }
+
+  try {
+
+    const data = await api("/admin/stats");
+
+    $("adminStats").innerHTML = `
+      کاربران: ${data.users}<br>
+      حوادث: ${data.incidents}<br>
+      تیم‌ها: ${data.teams}
+    `;
+
+  } catch {
+
+    $("adminStats").textContent =
+      "دریافت اطلاعات مدیریت ممکن نشد.";
+
+  }
+
+}
+
+
+function initializeMap() {
+
+  if (map || !window.maplibregl) return;
+
+  map = new maplibregl.Map({
+    container: "map",
+    style: "https://tiles.openfreemap.org/styles/liberty",
+    center: [67.709953, 33.93911],
+    zoom: 5.3
+  });
+
+  map.addControl(
+    new maplibregl.NavigationControl(),
+    "top-left"
+  );
+
+}
+
+
+$("searchBtn").addEventListener("click", searchPlace);
+
+
+$("searchPlace").addEventListener("keydown", event => {
+
+  if (event.key === "Enter") {
+    searchPlace();
+  }
+
+});
+
+
+async function searchPlace() {
+
+  const query = $("searchPlace").value.trim();
+
+  if (!query) return;
+
+  try {
+
+    const url =
+      "https://nominatim.openstreetmap.org/search?" +
+      new URLSearchParams({
+        q: query,
+        format: "json",
+        limit: "5",
+        countrycodes: "af"
+      });
+
+    const response = await fetch(url, {
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    const results = await response.json();
+
+    if (!results.length) {
+      alert("مکان پیدا نشد.");
+      return;
+    }
+
+    const result = results[0];
+
+    initializeMap();
+
+    map.flyTo({
+      center: [
+        Number(result.lon),
+        Number(result.lat)
+      ],
+      zoom: 13
+    });
+
+    new maplibregl.Marker()
+      .setLngLat([
+        Number(result.lon),
+        Number(result.lat)
+      ])
+      .setPopup(
+        new maplibregl.Popup()
+          .setHTML(
+            escapeHtml(result.display_name)
+          )
+      )
+      .addTo(map);
+
+  } catch (error) {
+
+    alert("جستجوی مکان انجام نشد.");
+
+  }
+
+}
+
+
+$("myLocationBtn").addEventListener("click", async () => {
+
+  try {
+
+    const position = await getCurrentPosition();
+
+    showPositionOnMap(position);
+
+  } catch {
+
+    alert(
+      "دسترسی به موقعیت فعال نیست یا اجازه GPS داده نشده است."
+    );
+
+  }
+
+});
+
+
+$("startGpsBtn").addEventListener("click", startGPS);
+
+
+$("stopGpsBtn").addEventListener("click", stopGPS);
+
+
+function startGPS() {
+
+  if (!navigator.geolocation) {
+
+    $("gpsInfo").textContent =
+      "مرورگر شما GPS را پشتیبانی نمی‌کند.";
+
+    return;
+  }
+
+  if (gpsWatchId !== null) {
+    return;
+  }
+
+  gpsWatchId = navigator.geolocation.watchPosition(
+    async position => {
+
+      const {
+        latitude,
+        longitude,
+        accuracy,
+        altitude,
+        speed,
+        heading
+      } = position.coords;
+
+      $("gpsInfo").innerHTML = `
+        عرض جغرافیایی: ${latitude.toFixed(6)}<br>
+        طول جغرافیایی: ${longitude.toFixed(6)}<br>
+        دقت: ${Math.round(accuracy || 0)} متر
+      `;
+
+      showPositionOnMap(position);
+
+      try {
+
+        await api("/locations", {
+          method: "POST",
+          body: JSON.stringify({
+            latitude,
+            longitude,
+            accuracy,
+            altitude,
+            speed,
+            heading
+          })
+        });
+
+      } catch {
+
+        saveOffline("location", {
+          latitude,
+          longitude,
+          accuracy,
+          altitude,
+          speed,
+          heading
+        });
+
+      }
+
+    },
+
+    error => {
+
+      $("gpsInfo").textContent =
+        "خطای GPS: " + error.message;
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 15000
+    }
+  );
+
+}
+
+
+function stopGPS() {
+
+  if (gpsWatchId !== null) {
+
+    navigator.geolocation.clearWatch(gpsWatchId);
+
+    gpsWatchId = null;
+
+    $("gpsInfo").textContent =
+      "GPS متوقف شد.";
+
+  }
+
+}
+
+
+function getCurrentPosition() {
+
+  return new Promise((resolve, reject) => {
+
+    if (!navigator.geolocation) {
+      reject(new Error("Geolocation unavailable"));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      resolve,
+      reject,
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000
+      }
+    );
+
+  });
+
+}
+
+
+function showPositionOnMap(position) {
+
+  initializeMap();
+
+  const lng =
+    position.coords.longitude;
+
+  const lat =
+    position.coords.latitude;
+
+  if (!userMarker) {
+
+    userMarker =
+      new maplibregl.Marker()
+        .setLngLat([lng, lat])
+        .addTo(map);
+
+  } else {
+
+    userMarker.setLngLat([lng, lat]);
+
+  }
+
+  map.flyTo({
+    center: [lng, lat],
+    zoom: 14
+  });
+
+}
+
+
+function connectWebSocket() {
+
+  if (!token) return;
+
+  const protocol =
+    location.protocol === "https:"
+      ? "wss:"
+      : "ws:";
+
+  websocket = new WebSocket(
+    `${protocol}//${location.host}/ws`
+  );
+
+  websocket.onopen = () => {
+
+    $("connectionStatus").textContent =
+      "اتصال زنده برقرار است";
+
+  };
+
+  websocket.onmessage = event => {
+
+    try {
+
+      const message =
+        JSON.parse(event.data);
+
+      if (
+        message.type === "incident.created" ||
+        message.type === "incident.updated"
+      ) {
+
+        loadIncidents();
+
+      }
+
+      if (message.type === "location.updated") {
+
+        loadLocations();
+
+      }
+
+    } catch {}
+
+  };
+
+  websocket.onclose = () => {
+
+    $("connectionStatus").textContent =
+      "اتصال زنده قطع شد";
+
+    setTimeout(() => {
+
+      if (token) {
+        connectWebSocket();
+      }
+
+    }, 5000);
+
+  };
+
+}
+
+
+function saveOffline(type, data) {
+
+  const queue =
+    JSON.parse(
+      localStorage.getItem("qh_offline_queue") || "[]"
+    );
+
+  queue.push({
+    id: crypto.randomUUID(),
+    type,
+    data,
+    createdAt: new Date().toISOString()
+  });
+
+  localStorage.setItem(
+    "qh_offline_queue",
+    JSON.stringify(queue)
+  );
+
+}
+
+
+async function syncOfflineQueue() {
+
+  const queue =
+    JSON.parse(
+      localStorage.getItem("qh_offline_queue") || "[]"
+    );
+
+  if (!queue.length || !token) return;
+
+  const remaining = [];
+
+  for (const item of queue) {
+
+    try {
+
+      if (item.type === "incident") {
+
+        await api("/incidents", {
+          method: "POST",
+          body: JSON.stringify(item.data)
+        });
+
+      }
+
+      if (item.type === "location") {
+
+        await api("/locations", {
+          method: "POST",
+          body: JSON.stringify(item.data)
+        });
+
+      }
+
+    } catch {
+
+      remaining.push(item);
+
+    }
+
+  }
+
+  localStorage.setItem(
+    "qh_offline_queue",
+    JSON.stringify(remaining)
+  );
+
+}
+
+
+window.addEventListener("online", syncOfflineQueue);
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker
+      .register("./sw.js")
+      .catch(error => {
+        console.warn(
+          "Service Worker registration failed:",
+          error
+        );
+      });
+
+  });
+
+}
+
+
+checkSession();
+</script>
+
+</body>
+</html>
